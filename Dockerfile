@@ -31,6 +31,9 @@ RUN apt-get update \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
 
+# Ergänzung für vlc unter root
+RUN cp /usr/bin/vlc /usr/bin/vlc_backup
+RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc
 
 # tini for subreap                                   
 ENV TINI_VERSION v0.9.0
